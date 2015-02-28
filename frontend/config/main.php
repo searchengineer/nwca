@@ -1,0 +1,53 @@
+<?php
+$params = array_merge(
+    require(__DIR__ . '/../../common/config/params.php'),
+    require(__DIR__ . '/../../common/config/params-local.php'),
+    require(__DIR__ . '/params.php'),
+    require(__DIR__ . '/params-local.php')
+);
+
+return [
+    'id' => 'app-frontend',
+    'basePath' => dirname(__DIR__),
+    //'bootstrap' => ['log'],
+    //'bootstrap' => ['gii'],
+    'controllerNamespace' => 'frontend\controllers',
+    'homeUrl' => '/',
+    'components' => [
+        'request' =>[
+            'baseUrl' => ''
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+                'rules' => [
+                    '/' => '/',
+                    '/' => 'site/index',
+                    '<alias:index|about|contact>' => 'site/<alias>',
+                    'classes' => 'classes/index',
+                    'instructors' => 'instructors/index',
+                    'testimonials' => 'testimonials/index',
+                    'news' => 'news/index',
+                    'events' => 'events/index',
+                     ],
+        ],
+        'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+        ],
+//        'log' => [
+//            'traceLevel' => YII_DEBUG ? 3 : 0,
+//            'targets' => [
+//                [
+//                    'class' => 'yii\log\FileTarget',
+//                    'levels' => ['error', 'warning'],
+//                ],
+//            ],
+//        ],
+        'errorHandler' => [
+            'errorAction' => 'site/error',
+        ],
+        
+    ],
+    'params' => $params,
+];
