@@ -1,0 +1,21 @@
+Options +FollowSymLinks
+IndexIgnore */*
+
+#Mode Rewrite
+RewriteEngine On
+
+#Backend Redirect
+RewriteCond %{REQUEST_URI} ^/admin
+RewriteRule ^admin/(.*)$ /backend/web/$1 [L]
+
+#Frontend Redirect
+RewriteCond %{REQUEST_URI} ^(.*)$
+RewriteRule ^(.*)$ frontend/web/$1
+
+RewriteCond %{REQUEST_URI} ^/images
+RewriteRule ^images/(.*)$ /images/$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule . index.php
